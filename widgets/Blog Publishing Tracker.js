@@ -816,25 +816,27 @@ function addFooter(widget, stats, data) {
 function smallWidget(stats, data) {
   const widget = baseWidget();
   widget.spacing = 0;
+  widget.setPadding(11, 14, 11, 14);
 
-  addHeader(widget, data, true);
   widget.addSpacer();
+  addHeader(widget, data, true);
+  widget.addSpacer(9);
 
   const goal = widget.addStack();
   goal.layoutVertically();
   goal.spacing = 0;
   addGoal(goal, stats, 120, true);
 
-  widget.addSpacer();
+  widget.addSpacer(4);
 
   const chart = widget.addImage(
     monthlyChart(stats.months, 120, 42)
   );
   chart.imageSize = new Size(120, 42);
 
-  widget.addSpacer();
-
+  widget.addSpacer(4);
   addFooter(widget, stats, data);
+  widget.addSpacer();
 
   return widget;
 }
