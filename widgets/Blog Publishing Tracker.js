@@ -849,6 +849,7 @@ function mediumWidget(stats, data) {
   const left = row.addStack();
   left.layoutVertically();
   left.spacing = 0;
+  left.size = new Size(144, 0);
 
   addGoal(left, stats, 144, true);
   left.addSpacer(5);
@@ -858,11 +859,13 @@ function mediumWidget(stats, data) {
   );
   chart.imageSize = new Size(144, 46);
 
-  row.addSpacer(11);
+  row.addSpacer(8);
 
   // A subtle divider separates progress from activity.
   const dividerColumn = row.addStack();
   dividerColumn.layoutVertically();
+  dividerColumn.size = new Size(1, 113);
+  dividerColumn.spacing = 0;
   dividerColumn.addSpacer(5);
 
   const divider = dividerColumn.addStack();
@@ -870,13 +873,14 @@ function mediumWidget(stats, data) {
   divider.backgroundColor = new Color(COLORS.secondary, 0.18);
   divider.cornerRadius = 0.5;
 
-  row.addSpacer(12);
+  row.addSpacer(8);
 
   const right = row.addStack();
   right.layoutVertically();
   right.spacing = 0;
 
   const width = 140;
+  right.size = new Size(width, 0);
   const h = heatmap(data.posts, width);
   const image = right.addImage(h.image);
   image.imageSize = new Size(width, h.height);
