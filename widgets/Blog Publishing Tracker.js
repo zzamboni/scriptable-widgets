@@ -837,34 +837,59 @@ function smallWidget(stats, data) {
 
 function mediumWidget(stats, data) {
   const widget = baseWidget();
+  widget.spacing = 0;
 
   addHeader(widget, data, false);
-  widget.addSpacer();
+  widget.addSpacer(5);
 
   const row = widget.addStack();
-  row.centerAlignContent();
+  row.topAlignContent();
 
+  // Match the small widget's goal and monthly history.
   const left = row.addStack();
   left.layoutVertically();
+  left.spacing = 0;
 
-  addGoal(left, stats, 120, false);
+  addGoal(left, stats, 118, true);
+  left.addSpacer(4);
+
+  const chart = left.addImage(
+    monthlyChart(stats.months, 120, 42)
+  );
+  chart.imageSize = new Size(120, 42);
 
   row.addSpacer();
 
+  // Activity and monthly counts share the right column.
   const right = row.addStack();
   right.layoutVertically();
+  right.spacing = 0;
 
-  addHeatmap(right, data.posts, 124);
+  addHeatmap(right, data.posts, 108);
+  right.addSpacer(4);
 
-  widget.addSpacer(8);
+  const counts = right.addStack();
+  counts.spacing = 0;
 
-  addCounts(widget, stats);
+  for (const [type, label, count] of [
+    ["article", "Articles", stats.articles],
+    ["link", "Links", stats.links],
+    ["photo", "Photos", stats.photos]
+  ]) {
+    const column = counts.addStack();
+    column.layoutVertically();
+    column.spacing = 0;
+
+    addText(column, label, 8, COLORS.secondary);
+    addText(column, count, 15, COLORS[type], "bold");
+
+    if (type !== "photo") counts.addSpacer(8);
+  }
+
+  widget.addSpacer();
 
   return widget;
 }
-
-
-
 
 function largeWidget(stats, data) {
   const widget = baseWidget();
