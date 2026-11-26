@@ -858,6 +858,18 @@ function mediumWidget(stats, data) {
   );
   chart.imageSize = new Size(144, 46);
 
+  row.addSpacer(11);
+
+  // A subtle divider separates progress from activity.
+  const dividerColumn = row.addStack();
+  dividerColumn.layoutVertically();
+  dividerColumn.addSpacer(5);
+
+  const divider = dividerColumn.addStack();
+  divider.size = new Size(1, 108);
+  divider.backgroundColor = new Color(COLORS.secondary, 0.18);
+  divider.cornerRadius = 0.5;
+
   row.addSpacer(12);
 
   const right = row.addStack();
