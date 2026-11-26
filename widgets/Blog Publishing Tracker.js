@@ -844,30 +844,41 @@ function mediumWidget(stats, data) {
 
   const row = widget.addStack();
   row.topAlignContent();
+  row.spacing = 0;
 
-  // Match the small widget's goal and monthly history.
   const left = row.addStack();
   left.layoutVertically();
   left.spacing = 0;
 
-  addGoal(left, stats, 118, true);
-  left.addSpacer(4);
+  addGoal(left, stats, 144, true);
+  left.addSpacer(5);
 
   const chart = left.addImage(
-    monthlyChart(stats.months, 120, 42)
+    monthlyChart(stats.months, 144, 46)
   );
-  chart.imageSize = new Size(120, 42);
+  chart.imageSize = new Size(144, 46);
 
-  row.addSpacer();
+  row.addSpacer(12);
 
-  // Activity and monthly counts share the right column.
   const right = row.addStack();
   right.layoutVertically();
   right.spacing = 0;
 
-  addHeatmap(right, data.posts, 108);
+  const width = 140;
+  const h = heatmap(data.posts, width);
+  const image = right.addImage(h.image);
+  image.imageSize = new Size(width, h.height);
+
+  right.addSpacer(3);
+  addText(
+    right,
+    `Last ${SETTINGS.heatmapWeeks} weeks`,
+    9,
+    COLORS.secondary
+  );
   right.addSpacer(4);
 
+  // The colored counts also serve as the heatmap legend.
   const counts = right.addStack();
   counts.spacing = 0;
 
@@ -879,13 +890,13 @@ function mediumWidget(stats, data) {
     const column = counts.addStack();
     column.layoutVertically();
     column.spacing = 0;
+    column.size = new Size(width / 3, 0);
 
-    addText(column, label, 8, COLORS.secondary);
-    addText(column, count, 15, COLORS[type], "bold");
-
-    if (type !== "photo") counts.addSpacer(8);
+    addText(column, label, 9, COLORS[type], "medium");
+    addText(column, count, 17, COLORS[type], "bold");
   }
 
+  row.addSpacer();
   widget.addSpacer();
 
   return widget;
