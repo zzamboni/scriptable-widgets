@@ -816,26 +816,41 @@ function addFooter(widget, stats, data) {
 function smallWidget(stats, data) {
   const widget = baseWidget();
   widget.spacing = 0;
-  widget.setPadding(11, 14, 11, 14);
+  widget.setPadding(12, 14, 12, 14);
 
   widget.addSpacer();
   addHeader(widget, data, true);
-  widget.addSpacer(9);
+  widget.addSpacer(8);
 
-  const goal = widget.addStack();
-  goal.layoutVertically();
-  goal.spacing = 0;
-  addGoal(goal, stats, 120, true);
+  const noun = stats.articles === 1 ? "article" : "articles";
+  addText(widget, `${stats.articles} ${noun}`, 22, COLORS.primary, "bold");
+  widget.addSpacer(1);
+  addText(widget, `Published in ${stats.month}`, 9, COLORS.secondary);
 
-  widget.addSpacer(4);
+  if (stats.goal > 0) {
+    widget.addSpacer(5);
+    const bar = widget.addImage(progressBar(stats.articles / stats.goal, 120));
+    bar.imageSize = new Size(120, 6);
+    widget.addSpacer(3);
+    addText(widget, stats.articles >= stats.goal
+      ? "Monthly goal achieved!"
+      : `${stats.articles} of ${stats.goal} monthly goal`,
+      9, COLORS.article, "medium");
+  }
 
-  const chart = widget.addImage(
-    monthlyChart(stats.months, 120, 42)
-  );
-  chart.imageSize = new Size(120, 42);
+  widget.addSpacer(6);
+  const chart = widget.addImage(monthlyChart(stats.months, 120, 46));
+  chart.imageSize = new Size(120, 46);
 
-  widget.addSpacer(4);
-  addFooter(widget, stats, data);
+  widget.addSpacer(6);
+  if (data.cached) {
+    addFooter(widget, stats, data);
+  } else {
+    const last = stats.lastArticle
+      ? relativeDate(new Date(stats.lastArticle.date))
+      : "No articles";
+    addText(widget, `Last article: ${last.toLowerCase()}`, 9, COLORS.secondary);
+  }
   widget.addSpacer();
 
   return widget;
