@@ -868,7 +868,7 @@ function mediumWidget(stats, data) {
   );
   chart.imageSize = new Size(144, 46);
 
-  row.addSpacer(8);
+  row.addSpacer();
 
   // A subtle divider separates progress from activity.
   const dividerColumn = row.addStack();
@@ -882,7 +882,7 @@ function mediumWidget(stats, data) {
   divider.backgroundColor = new Color(COLORS.secondary, 0.18);
   divider.cornerRadius = 0.5;
 
-  row.addSpacer(8);
+  row.addSpacer();
 
   const right = row.addStack();
   right.layoutVertically();
@@ -921,7 +921,6 @@ function mediumWidget(stats, data) {
     addText(column, count, 17, COLORS[type], "bold");
   }
 
-  row.addSpacer();
   widget.addSpacer();
 
   return widget;
