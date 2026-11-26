@@ -815,17 +815,21 @@ function addFooter(widget, stats, data) {
 
 function smallWidget(stats, data) {
   const widget = baseWidget();
+  widget.spacing = 0;
 
   addHeader(widget, data, true);
   widget.addSpacer();
 
-  addGoal(widget, stats, 118, true);
-  widget.addSpacer(6);
+  const goal = widget.addStack();
+  goal.layoutVertically();
+  goal.spacing = 0;
+  addGoal(goal, stats, 120, true);
+
+  widget.addSpacer();
 
   const chart = widget.addImage(
     monthlyChart(stats.months, 120, 42)
   );
-
   chart.imageSize = new Size(120, 42);
 
   widget.addSpacer();
