@@ -4,7 +4,8 @@
 
 /*
  * Blog Publishing Tracker
- * Scriptable widget for zzamboni.org
+ * Scriptable widget for a Hugo blog
+ * Diego Zamboni, November 2026
  *
  * Small: monthly goal and publishing history
  * Medium: statistics and activity heatmap

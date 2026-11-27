@@ -1,10 +1,11 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: cyan; icon-glyph: sf:globe.europe.africa.fill;
+// icon-color: blue; icon-glyph: sf:globe.europe.africa.fill;
 
 /*
  * Netlify Build Minutes
  * iOS Scriptable widget
+ * Diego Zamboni, November 2026
  *
  * Supports small and medium widgets.
  * Run in Scriptable for initial setup.
