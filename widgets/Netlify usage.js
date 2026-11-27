@@ -14,6 +14,7 @@
 // ── Configuration ───────────────────────────
 
 const SETTINGS = {
+  account: "zzamboni",
   refreshMinutes: 60,
   previewSize: "small",
   warningThreshold: 75,
@@ -38,8 +39,6 @@ const COLORS = {
 
 
 async function setup() {
-  const account = "zzamboni";
-
   const alert = new Alert();
   alert.title = "Netlify API Token";
   alert.message =
@@ -63,7 +62,7 @@ async function setup() {
     throw new Error("Invalid token format");
   }
 
-  Keychain.set(SETTINGS.keychainAccount, account);
+  Keychain.set(SETTINGS.keychainAccount, SETTINGS.account);
   Keychain.set(SETTINGS.keychainToken, token);
 
   if (Keychain.contains(SETTINGS.keychainCache)) {
