@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: teal; icon-glyph: sync;
+// icon-color: deep-green; icon-glyph: sf:wand.and.stars;
 
 const SETTINGS = {
   owner: "zzamboni",

@@ -1,0 +1,7 @@
+[tasks.export]
+description = "Generate Scriptable installation packages"
+run = "python3 tools/export-scriptable.py"
+
+[tasks.check]
+description = "Check that Scriptable packages match their sources"
+run = "python3 tools/export-scriptable.py --check"

@@ -30,6 +30,14 @@ This widget uses the Netlify =/api/v1/<account>/builds/status= endpoint and requ
 
 * Installation
 
+Download the packaged script on your iPhone and open or share it with Scriptable:
+
+- [[https://raw.githubusercontent.com/zzamboni/scriptable-widgets/main/widgets/Blog%20Publishing%20Tracker.scriptable][Blog Publishing Tracker]]
+- [[https://raw.githubusercontent.com/zzamboni/scriptable-widgets/main/widgets/Netlify%20usage.scriptable][Netlify usage]]
+- [[https://raw.githubusercontent.com/zzamboni/scriptable-widgets/main/Sync%20Widgets.scriptable][Sync Widgets]]
+
+Alternatively, install from JavaScript source:
+
 1. Install Scriptable on your iPhone.
 2. Create a script with the same name as the desired JavaScript file (without the =.js= extension), paste its contents, and run it once. Alternatively, copy the JavaScript file into the Scriptable scripts folder.
 3. Add a Scriptable home-screen widget in a supported size and select the script.
@@ -41,3 +49,9 @@ Install [[file:Sync%20Widgets.js][Sync Widgets.js]] once using the same procedur
 On your laptop, clone the repository, edit the scripts in your preferred editor, commit and push, then run Sync Widgets on your phone. Local edits on the phone will be overwritten by the repository version; make configuration changes in your own trusted repository or branch. The Netlify Keychain entries are not changed by synchronization.
 
 Only synchronize from a repository and branch you trust: downloaded JavaScript will run with Scriptable's permissions, including access to stored credentials. Review changes before syncing. The synchronization script is experimental and needs on-device testing. Refresh intervals are requests to iOS, not guaranteed schedules.
+
+* Generating installation packages
+
+The JavaScript files are canonical. The generator reads the native =icon-color= and =icon-glyph= header comments (defaulting to =blue= and =magic=), derives the name from the filename, and preserves the entire source. Other metadata defaults to =always_run_in_app: false= and an empty =share_sheet_inputs= array.
+
+Run =mise run export= (or =python3 tools/export-scriptable.py=) after editing scripts, and commit the generated =.scriptable= files alongside the sources. Run =mise run check= to detect stale packages; GitHub Actions performs the same check. The sync utility continues to download JavaScript directly.
